@@ -18,6 +18,7 @@ namespace WebSoutenanceBack.DAL
         public soutenanceAJCEntities()
             : base("name=soutenanceAJCEntities")
         {
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
