@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="soutenanceAJCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="255" />
+          <Property Name="categorie" Type="varchar" MaxLength="255" />
+          <Property Name="taille_id" Type="int" />
+          <Property Name="matiere_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Authentification">
+          <Key>
+            <PropertyRef Name="login" />
+          </Key>
+          <Property Name="login" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="mot_de_passe" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="users_id" Type="int" />
+        </EntityType>
+        <EntityType Name="CommandeArticle">
+          <Key>
+            <PropertyRef Name="commande_id" />
+            <PropertyRef Name="article_id" />
+          </Key>
+          <Property Name="commande_id" Type="int" Nullable="false" />
+          <Property Name="article_id" Type="int" Nullable="false" />
+          <Property Name="quantite" Type="int" />
+        </EntityType>
+        <EntityType Name="Matiere">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="matiere" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Taille">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="diametre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="255" />
+          <Property Name="prenom" Type="varchar" MaxLength="255" />
+          <Property Name="mail" Type="varchar" MaxLength="255" />
+          <Property Name="adresse_postale" Type="varchar" MaxLength="255" />
+          <Property Name="telephone" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__Article__matiere__15502E78">
+          <End Role="Matiere" Type="Self.Matiere" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matiere">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="matiere_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Article__taille___145C0A3F">
+          <End Role="Taille" Type="Self.Taille" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taille">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="taille_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Authentif__login__21B6055D" />-->
+        <Association Name="FK__Commande__users___1B0907CE">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommandeA__artic__1ED998B2">
+          <End Role="Article" Type="Self.Article" Multiplicity="1" />
+          <End Role="CommandeArticle" Type="Self.CommandeArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CommandeArticle">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommandeA__comma__1DE57479">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="1" />
+          <End Role="CommandeArticle" Type="Self.CommandeArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CommandeArticle">
+              <PropertyRef Name="commande_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="soutenanceAJCModelStoreContainer">
+          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authentification" EntityType="Self.Authentification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommandeArticle" EntityType="Self.CommandeArticle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matiere" EntityType="Self.Matiere" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Taille" EntityType="Self.Taille" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Article__matiere__15502E78" Association="Self.FK__Article__matiere__15502E78">
+            <End Role="Matiere" EntitySet="Matiere" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Article__taille___145C0A3F" Association="Self.FK__Article__taille___145C0A3F">
+            <End Role="Taille" EntitySet="Taille" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Commande__users___1B0907CE" Association="Self.FK__Commande__users___1B0907CE">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommandeA__artic__1ED998B2" Association="Self.FK__CommandeA__artic__1ED998B2">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="CommandeArticle" EntitySet="CommandeArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommandeA__comma__1DE57479" Association="Self.FK__CommandeA__comma__1DE57479">
+            <End Role="Commande" EntitySet="Commande" />
+            <End Role="CommandeArticle" EntitySet="CommandeArticle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="soutenanceAJCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="categorie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="taille_id" Type="Int32" />
+          <Property Name="matiere_id" Type="Int32" />
+          <NavigationProperty Name="Matiere" Relationship="Self.FK__Article__matiere__15502E78" FromRole="Article" ToRole="Matiere" />
+          <NavigationProperty Name="Taille" Relationship="Self.FK__Article__taille___145C0A3F" FromRole="Article" ToRole="Taille" />
+          <NavigationProperty Name="CommandeArticle" Relationship="Self.FK__CommandeA__artic__1ED998B2" FromRole="Article" ToRole="CommandeArticle" />
+        </EntityType>
+        <EntityType Name="Authentification">
+          <Key>
+            <PropertyRef Name="login" />
+          </Key>
+          <Property Name="login" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mot_de_passe" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Commande">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="users_id" Type="Int32" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Commande__users___1B0907CE" FromRole="Commande" ToRole="Users" />
+          <NavigationProperty Name="CommandeArticle" Relationship="Self.FK__CommandeA__comma__1DE57479" FromRole="Commande" ToRole="CommandeArticle" />
+        </EntityType>
+        <EntityType Name="CommandeArticle">
+          <Key>
+            <PropertyRef Name="commande_id" />
+            <PropertyRef Name="article_id" />
+          </Key>
+          <Property Name="commande_id" Type="Int32" Nullable="false" />
+          <Property Name="article_id" Type="Int32" Nullable="false" />
+          <Property Name="quantite" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="Self.FK__CommandeA__artic__1ED998B2" FromRole="CommandeArticle" ToRole="Article" />
+          <NavigationProperty Name="Commande" Relationship="Self.FK__CommandeA__comma__1DE57479" FromRole="CommandeArticle" ToRole="Commande" />
+        </EntityType>
+        <EntityType Name="Matiere">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matiere1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Article" Relationship="Self.FK__Article__matiere__15502E78" FromRole="Matiere" ToRole="Article" />
+        </EntityType>
+        <EntityType Name="Taille">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="diametre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Article" Relationship="Self.FK__Article__taille___145C0A3F" FromRole="Taille" ToRole="Article" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="mail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="adresse_postale" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="telephone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Commande" Relationship="Self.FK__Commande__users___1B0907CE" FromRole="Users" ToRole="Commande" />
+        </EntityType>
+        <Association Name="FK__Article__matiere__15502E78">
+          <End Role="Matiere" Type="Self.Matiere" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matiere">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="matiere_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Article__taille___145C0A3F">
+          <End Role="Taille" Type="Self.Taille" Multiplicity="0..1" />
+          <End Role="Article" Type="Self.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Taille">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="taille_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommandeA__artic__1ED998B2">
+          <End Role="Article" Type="Self.Article" Multiplicity="1" />
+          <End Role="CommandeArticle" Type="Self.CommandeArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CommandeArticle">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Commande__users___1B0907CE">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Commande">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommandeA__comma__1DE57479">
+          <End Role="Commande" Type="Self.Commande" Multiplicity="1" />
+          <End Role="CommandeArticle" Type="Self.CommandeArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commande">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CommandeArticle">
+              <PropertyRef Name="commande_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="soutenanceAJCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Article" EntityType="Self.Article" />
+          <EntitySet Name="Authentification" EntityType="Self.Authentification" />
+          <EntitySet Name="Commande" EntityType="Self.Commande" />
+          <EntitySet Name="CommandeArticle" EntityType="Self.CommandeArticle" />
+          <EntitySet Name="Matiere" EntityType="Self.Matiere" />
+          <EntitySet Name="Taille" EntityType="Self.Taille" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Article__matiere__15502E78" Association="Self.FK__Article__matiere__15502E78">
+            <End Role="Matiere" EntitySet="Matiere" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Article__taille___145C0A3F" Association="Self.FK__Article__taille___145C0A3F">
+            <End Role="Taille" EntitySet="Taille" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommandeA__artic__1ED998B2" Association="Self.FK__CommandeA__artic__1ED998B2">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="CommandeArticle" EntitySet="CommandeArticle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Commande__users___1B0907CE" Association="Self.FK__Commande__users___1B0907CE">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Commande" EntitySet="Commande" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommandeA__comma__1DE57479" Association="Self.FK__CommandeA__comma__1DE57479">
+            <End Role="Commande" EntitySet="Commande" />
+            <End Role="CommandeArticle" EntitySet="CommandeArticle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="soutenanceAJCModelStoreContainer" CdmEntityContainer="soutenanceAJCEntities">
+          <EntitySetMapping Name="Article">
+            <EntityTypeMapping TypeName="soutenanceAJCModel.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="categorie" ColumnName="categorie" />
+                <ScalarProperty Name="taille_id" ColumnName="taille_id" />
+                <ScalarProperty Name="matiere_id" ColumnName="matiere_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authentification">
+            <EntityTypeMapping TypeName="soutenanceAJCModel.Authentification">
+              <MappingFragment StoreEntitySet="Authentification">
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="mot_de_passe" ColumnName="mot_de_passe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commande">
+            <EntityTypeMapping TypeName="soutenanceAJCModel.Commande">
+              <MappingFragment StoreEntitySet="Commande">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="users_id" ColumnName="users_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommandeArticle">
+            <EntityTypeMapping TypeName="soutenanceAJCModel.CommandeArticle">
+              <MappingFragment StoreEntitySet="CommandeArticle">
+                <ScalarProperty Name="commande_id" ColumnName="commande_id" />
+                <ScalarProperty Name="article_id" ColumnName="article_id" />
+                <ScalarProperty Name="quantite" ColumnName="quantite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matiere">
+            <EntityTypeMapping TypeName="soutenanceAJCModel.Matiere">
+              <MappingFragment StoreEntitySet="Matiere">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="matiere1" ColumnName="matiere" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Taille">
+            <EntityTypeMapping TypeName="soutenanceAJCModel.Taille">
+              <MappingFragment StoreEntitySet="Taille">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="diametre" ColumnName="diametre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="soutenanceAJCModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="adresse_postale" ColumnName="adresse_postale" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
