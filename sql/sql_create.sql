@@ -28,7 +28,8 @@ CREATE TABLE Users (
   prenom VARCHAR(255),
   mail VARCHAR(255) UNIQUE,
   adresse_postale VARCHAR(255),
-  telephone VARCHAR(255)
+  telephone VARCHAR(255),
+  isAdmin BIT
 );
 
 CREATE TABLE Commande (
