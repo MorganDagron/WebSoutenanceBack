@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WebSoutenanceBack.DAL;
+using System.Web.Http.Cors; 
 
 namespace WebSoutenanceBack.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ArticleController : ApiController
     {
         // GET api/<controller>

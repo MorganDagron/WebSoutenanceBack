@@ -1,7 +1,7 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Antoine\source\repos\WebSoutenanceBack\WebSoutenanceBack\DAL\soutenanceAJCModel.edmx'. 
-// To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
-// property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
-// is open in the designer.
+﻿// La génération de code T4 est activée pour le modèle 'C:\Users\devil\Documents\GitHub\soutenanceAJCBack\WebSoutenanceBack\DAL\soutenanceAJCModel.edmx'. 
+// Pour activer la génération de code héritée, définissez la valeur de la propriété
+// du concepteur 'Stratégie de génération de code' sur 'ObjectContext hérité'. Cette propriété est disponible dans la fenêtre Propriétés lorsque le modèle
+//  est ouvert dans le concepteur.
 
 // If no context and entity classes have been generated, it may be because you created an empty model but
 // have not yet chosen which version of Entity Framework to use. To generate a context class and entity
