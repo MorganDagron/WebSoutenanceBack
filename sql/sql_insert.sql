@@ -26,12 +26,13 @@ INSERT INTO Article (nom, categorie, taille_id, matiere_id) VALUES
 ('Sac à main', 'Accessoires', 3, 3);
 
 -- Inserting data into Users table
-INSERT INTO Users (nom, prenom, mail, adresse_postale, telephone) VALUES
-('Doe', 'John', 'john.doe@example.com', '123 Main St', '0123456789'),
-('Doe', 'Jane', 'jane.doe@example.com', '456 Elm St', '0987654321'),
-('Smith', 'Bob', 'bob.smith@example.com', '789 Oak St', '5551234567'),
-('Johnson', 'Alice', 'alice.johnson@example.com', '321 Pine St', '5559012345'),
-('Williams', 'Mike', 'mike.williams@example.com', '901 Maple St', '5551112222');
+INSERT INTO Users (nom, prenom, mail, adresse_postale, telephone, isAdmin) VALUES
+('Doe', 'John', 'john.doe@example.com', '123 Main St', '0123456789', 0),
+('Doe', 'Jane', 'jane.doe@example.com', '456 Elm St', '0987654321', 0),
+('Smith', 'Bob', 'bob.smith@example.com', '789 Oak St', '5551234567', 0),
+('Johnson', 'Alice', 'alice.johnson@example.com', '321 Pine St', '5559012345', 0),
+('Williams', 'Mike', 'mike.williams@example.com', '901 Maple St', '5551112222', 0),
+('admin', 'admin', 'admin@example.com', '', '', 1);
 
 -- Inserting data into Commande table
 INSERT INTO Commande (users_id) VALUES
