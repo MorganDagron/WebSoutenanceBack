@@ -495,6 +495,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\AuthentificationController.cs" />
     <Compile Include="Controllers\CommandeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -512,6 +513,7 @@
       <DependentUpon>soutenanceAJCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DaoArticle.cs" />
+    <Compile Include="DAL\DaoAuthentification.cs" />
     <Compile Include="DAL\DaoCommande.cs" />
     <Compile Include="DAL\DaoUsers.cs" />
     <Compile Include="DAL\Matiere.cs">
