@@ -28,7 +28,8 @@ CREATE TABLE Users (
   prenom VARCHAR(255),
   mail VARCHAR(255) UNIQUE,
   adresse_postale VARCHAR(255),
-  telephone VARCHAR(255)
+  telephone VARCHAR(255),
+  isAdmin BIT
 );
 
 CREATE TABLE Commande (
@@ -50,4 +51,24 @@ CREATE TABLE Authentification (
   login VARCHAR(255) PRIMARY KEY,
   mot_de_passe VARCHAR(255),
   FOREIGN KEY (login) REFERENCES Users(mail)
+);
+
+CREATE TABLE BlogArticle (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  imageUrl VARCHAR(255),
+  titre VARCHAR(255),
+  contenu TEXT,
+  creationDate DATETIME,
+  categorie VARCHAR(255)
+);
+
+CREATE TABLE Comments (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  titre VARCHAR(255),
+  contenu TEXT,
+  creationDate DATETIME,
+  idUser INT,
+  IdArticle INT,
+  FOREIGN KEY (article_id) REFERENCES Article(id),
+  FOREIGN KEY (users_id) REFERENCES Users(id)
 );
