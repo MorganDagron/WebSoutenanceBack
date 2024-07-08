@@ -10,8 +10,27 @@ namespace WebSoutenanceBack.Controllers
 {
     public class UsersController : ApiController
     {
+        private DaoUsers daoUsers = new DaoUsers();
+
+        // GET api/Users
+        public List<UserDto> Get()
+        {
+            return new DaoUsers().FindAll();
+        }
+
+        // GET api/Users?mail=admin@example.com
+        public UserDto Get(string mail)
+        {
+            return new DaoUsers().FindByMail(mail);
+        }
+
+        // DELETE api/Users?mail=admin@example.com
+        public void Delete(string mail)
+        {
+            new DaoUsers().Delete(mail);
+        }
         // GET api/<controller>
-        public List<Users> Get()
+       /* public List<Users> Get()
         {
             return new DaoUsers().FindAll();
         }
@@ -20,8 +39,7 @@ namespace WebSoutenanceBack.Controllers
         public Users Get(string mail)
         {
             return new DaoUsers().FindByMail(mail);
-        }
-
+        }*/
         // POST api/<controller>
         public void Post([FromBody] Users u)
         {
@@ -35,9 +53,9 @@ namespace WebSoutenanceBack.Controllers
         }
 
         // DELETE api/<controller>/5
-        public void Delete(string mail)
+        /*public void Delete(string mail)
         {
             new DaoUsers().Delete(mail);
-        }
+        }*/
     }
 }

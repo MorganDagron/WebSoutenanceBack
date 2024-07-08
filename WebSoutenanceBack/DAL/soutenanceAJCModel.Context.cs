@@ -18,6 +18,7 @@ namespace WebSoutenanceBack.DAL
         public soutenanceAJCEntities()
             : base("name=soutenanceAJCEntities")
         {
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -32,7 +33,5 @@ namespace WebSoutenanceBack.DAL
         public virtual DbSet<Matiere> Matiere { get; set; }
         public virtual DbSet<Taille> Taille { get; set; }
         public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<BlogArticle> BlogArticle { get; set; }
-        public virtual DbSet<Comments> Comments { get; set; }
     }
 }

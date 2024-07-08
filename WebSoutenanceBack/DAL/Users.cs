@@ -18,7 +18,6 @@ namespace WebSoutenanceBack.DAL
         public Users()
         {
             this.Commande = new HashSet<Commande>();
-            this.Comments = new HashSet<Comments>();
         }
     
         public int id { get; set; }
@@ -31,7 +30,5 @@ namespace WebSoutenanceBack.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Commande> Commande { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comments> Comments { get; set; }
     }
 }

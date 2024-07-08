@@ -22,6 +22,9 @@ namespace WebSoutenanceBack.Controllers
             return new DaoAuthentification().FindByLogin(login);
         }
 
+
+        [HttpPost]
+        [Route("api/authentification/create")]
         // POST api/<controller>
         public void Post([FromBody] Authentification a)
         {
@@ -35,6 +38,8 @@ namespace WebSoutenanceBack.Controllers
         }
 
         // POST api/<controller>/login
+        [HttpPost]
+        [Route("api/authentification/login")]
         public Authentification Login([FromBody] Authentification authentification)
         {
             return new DaoAuthentification().FindByUsernameAndPassword(authentification.login, authentification.mot_de_passe);

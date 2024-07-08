@@ -8,7 +8,43 @@ namespace WebSoutenanceBack.DAL
 {
     public class DaoUsers
     {
-        public List<Users> FindAll()
+
+        public List<UserDto> FindAll()
+        {
+            using (soutenanceAJCEntities context = new soutenanceAJCEntities())
+            {
+                return context.Users.Select(u => new UserDto
+                {
+                    Mail = u.mail,
+                    Nom = u.nom,
+                    Prenom = u.prenom,
+                    AdressePostale = u.adresse_postale,
+                    Telephone = u.telephone,
+                    IsAdmin = u.isAdmin ?? false
+                }).ToList();
+            }
+        }
+
+        public UserDto FindByMail(string mail)
+        {
+            using (soutenanceAJCEntities context = new soutenanceAJCEntities())
+            {
+                var user = context.Users.FirstOrDefault(u => u.mail == mail);
+                if (user == null) return null;
+
+                return new UserDto
+                {
+                    Mail = user.mail,
+                    Nom = user.nom,
+                    Prenom = user.prenom,
+                    AdressePostale = user.adresse_postale,
+                    Telephone = user.telephone,
+                    IsAdmin = user.isAdmin ?? false
+                };
+            }
+        }
+
+        /*public List<Users> FindAll()
         {
             soutenanceAJCEntities context = new soutenanceAJCEntities();
             return context.Users.ToList<Users>();
@@ -18,7 +54,7 @@ namespace WebSoutenanceBack.DAL
         {
             soutenanceAJCEntities context = new soutenanceAJCEntities();
             return context.Users.FirstOrDefault(u => u.mail == mail);
-        }
+        }*/
 
         public void Create(Users u)
         {

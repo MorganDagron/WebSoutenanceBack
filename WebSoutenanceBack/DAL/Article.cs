@@ -18,20 +18,15 @@ namespace WebSoutenanceBack.DAL
         public Article()
         {
             this.CommandeArticle = new HashSet<CommandeArticle>();
-            this.Comments = new HashSet<Comments>();
         }
     
         public int id { get; set; }
         public string nom { get; set; }
         public string categorie { get; set; }
-        public Nullable<int> taille_id { get; set; }
-        public Nullable<int> matiere_id { get; set; }
     
         public virtual Matiere Matiere { get; set; }
         public virtual Taille Taille { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommandeArticle> CommandeArticle { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comments> Comments { get; set; }
     }
 }
