@@ -67,8 +67,8 @@ CREATE TABLE Comments (
   titre VARCHAR(255),
   contenu TEXT,
   creationDate DATETIME,
-  idUser INT,
-  IdArticle INT,
+  users_id INT,
+  article_id INT,
   FOREIGN KEY (article_id) REFERENCES Article(id),
   FOREIGN KEY (users_id) REFERENCES Users(id)
 );
