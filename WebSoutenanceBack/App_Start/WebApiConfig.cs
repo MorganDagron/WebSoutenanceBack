@@ -10,6 +10,9 @@ namespace WebSoutenanceBack
     {
         public static void Register(HttpConfiguration config)
         {
+             
+            config.EnableCors();
+
             // Configuration et services API Web
             //config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
