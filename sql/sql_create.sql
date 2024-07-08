@@ -52,3 +52,12 @@ CREATE TABLE Authentification (
   mot_de_passe VARCHAR(255),
   FOREIGN KEY (login) REFERENCES Users(mail)
 );
+
+CREATE TABLE BlogArticle (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  imageUrl VARCHAR(255),
+  titre VARCHAR(255),
+  contenu TEXT,
+  creationDate DATETIME,
+  categorie VARCHAR(255)
+);
