@@ -516,6 +516,7 @@
       <DependentUpon>soutenanceAJCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DaoArticle.cs" />
+    <Compile Include="DAL\DaoAuthentification.cs" />
     <Compile Include="DAL\DaoCommande.cs" />
     <Compile Include="DAL\DaoUsers.cs" />
     <Compile Include="DAL\Matiere.cs">
