@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 
 namespace WebSoutenanceBack.DAL
 {
@@ -14,24 +15,16 @@ namespace WebSoutenanceBack.DAL
             return context.Authentification.ToList<Authentification>();
         }
 
-        public Authentification FindById(int id)
+        public Authentification FindByLogin(string login)
         {
             soutenanceAJCEntities context = new soutenanceAJCEntities();
-            return context.Authentification.Find(id);
+            return context.Authentification.Find(login);
         }
 
         public void Create(Authentification a)
         {
             soutenanceAJCEntities context = new soutenanceAJCEntities();
             context.Authentification.Add(a);
-            context.SaveChanges();
-        }
-
-        public void Delete(int id)
-        {
-            soutenanceAJCEntities context = new soutenanceAJCEntities();
-            Authentification a = context.Authentification.Find(id);
-            context.Authentification.Remove(a);
             context.SaveChanges();
         }
 

@@ -14,10 +14,10 @@ namespace WebSoutenanceBack.DAL
             return context.Users.ToList<Users>();
         }
 
-        public Users FindById(int id)
+        public Users FindByMail(string mail)
         {
             soutenanceAJCEntities context = new soutenanceAJCEntities();
-            return context.Users.Find(id);
+            return context.Users.FirstOrDefault(u => u.mail == mail);
         }
 
         public void Create(Users u)
@@ -27,12 +27,20 @@ namespace WebSoutenanceBack.DAL
             context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public void Delete(string mail)
         {
             soutenanceAJCEntities context = new soutenanceAJCEntities();
-            Users u = context.Users.Find(id);
-            context.Users.Remove(u);
-            context.SaveChanges();
+            Users user = context.Users.FirstOrDefault(u => u.mail == mail);
+            if (user != null)
+            {
+                List<Authentification> auths = context.Authentification.Where(a => a.login == mail).ToList();
+                foreach (var auth in auths)
+                {
+                    context.Authentification.Remove(auth);
+                }
+                context.Users.Remove(user);
+                context.SaveChanges();
+            }
         }
 
         public void Update(Users u)

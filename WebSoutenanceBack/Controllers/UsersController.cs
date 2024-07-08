@@ -17,9 +17,9 @@ namespace WebSoutenanceBack.Controllers
         }
 
         // GET api/<controller>/5
-        public Users Get(int id)
+        public Users Get(string mail)
         {
-            return new DaoUsers().FindById(id);
+            return new DaoUsers().FindByMail(mail);
         }
 
         // POST api/<controller>
@@ -35,9 +35,9 @@ namespace WebSoutenanceBack.Controllers
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public void Delete(string mail)
         {
-            new DaoUsers().Delete(id);
+            new DaoUsers().Delete(mail);
         }
     }
 }
