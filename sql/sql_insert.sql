@@ -61,7 +61,7 @@ INSERT INTO Authentification (login, mot_de_passe) VALUES
 ('bob.smith@example.com', 'password789'),
 ('alice.johnson@example.com', 'password012'),
 ('mike.williams@example.com', 'password345'),
-('admin.example.com','admin');
+('admin@example.com','admin');
 
 -- Inserting data into BlogArticle table
 INSERT INTO BlogArticle (imageUrl, titre, contenu, creationDate, categorie) VALUES
