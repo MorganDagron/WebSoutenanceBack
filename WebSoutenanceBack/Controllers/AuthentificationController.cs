@@ -17,9 +17,9 @@ namespace WebSoutenanceBack.Controllers
         }
 
         // GET api/<controller>/5
-        public Authentification Get(int id)
+        public Authentification Get(string login)
         {
-            return new DaoAuthentification().FindById(id);
+            return new DaoAuthentification().FindByLogin(login);
         }
 
         // POST api/<controller>
@@ -32,12 +32,6 @@ namespace WebSoutenanceBack.Controllers
         public void Put([FromBody] Authentification a)
         {
             new DaoAuthentification().Update(a);
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-            new DaoAuthentification().Delete(id);
         }
 
         // POST api/<controller>/login
