@@ -60,4 +60,22 @@ INSERT INTO Authentification (login, mot_de_passe) VALUES
 ('jane.doe@example.com', 'password456'),
 ('bob.smith@example.com', 'password789'),
 ('alice.johnson@example.com', 'password012'),
-('mike.williams@example.com', 'password345');
+('mike.williams@example.com', 'password345'),
+('admin.example.com','admin');
+
+-- Inserting data into BlogArticle table
+INSERT INTO BlogArticle (imageUrl, titre, contenu, creationDate, categorie) VALUES
+('https://picsum.photos/200/300', 'Les dernières tendances en bijoux', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.', '2022-01-01 10:00:00', 'Bijoux'),
+('https://picsum.photos/200/301', 'Les avantages du cuivre dans les accessoires', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.', '2022-01-15 14:00:00', 'Accessoires'),
+('https://picsum.photos/200/302', 'La mode des montres cette saison', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.', '2022-02-01 12:00:00', 'Montres'),
+('https://picsum.photos/200/303', 'Les nouvelles arrivées en matière de sacs à main', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.', '2022-03-01 16:00:00', 'Accessoires'),
+('https://picsum.photos/200/304', 'Les bijoux de luxe pour les occasions spéciales', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.', '2022-04-01 10:00:00', 'Bijoux');
+
+-- Inserting data into Comments table
+INSERT INTO Comments (titre, contenu, creationDate, idUser, IdArticle) VALUES
+('Super article !', 'J''ai vraiment apprécié cet article sur les dernières tendances en bijoux.', '2022-01-05 12:00:00', 1, 1),
+('Intéressant !', 'Je ne savais pas que le cuivre avait autant d''avantages dans les accessoires.', '2022-01-20 14:00:00', 2, 2),
+('J''adore !', 'Je suis fan de montres et cet article m''a donné des idées pour mon prochain achat.', '2022-02-10 16:00:00', 3, 3),
+('Très utile !', 'Merci pour les conseils sur les sacs à main, j''en ai besoin pour mon prochain achat.', '2022-03-15 12:00:00', 4, 4),
+('Magnifique !', 'Les bijoux de luxe présentés dans cet article sont vraiment incroyables.', '2022-04-10 10:00:00', 5, 5),
+('Question ?', 'Pouvez-vous me donner plus d''informations sur les matériaux utilisés dans les bijoux de luxe ?', '2022-04-15 14:00:00', 1, 5);
