@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using AdminWebBack.Models;
 
 namespace AdminWebBack.Data
@@ -13,7 +9,6 @@ namespace AdminWebBack.Data
         {
         }
 
-        public DbSet<Admin> Admins { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Commande> Commandes { get; set; }
         public DbSet<CommandeArticle> CommandeArticles { get; set; }

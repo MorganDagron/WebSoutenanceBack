@@ -8,64 +8,64 @@ using System.Web.Mvc;
 namespace AdminWebBack.Controllers
 {
     [AdminAuthorize]
-    public class ArticlesController : Controller
+    public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ArticlesController()
+        public UsersController()
         {
             _context = new ApplicationDbContext();
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetArticles()
+        public async Task<ActionResult> GetUsers()
         {
-            var articles = await _context.Articles.ToListAsync();
-            return Json(articles, JsonRequestBehavior.AllowGet);
+            var users = await _context.Users.ToListAsync();
+            return Json(users, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetArticle(int id)
+        public async Task<ActionResult> GetUser(int id)
         {
-            var article = await _context.Articles.FindAsync(id);
-            if (article == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
-            return Json(article, JsonRequestBehavior.AllowGet);
+            return Json(user, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateArticle(Article article)
+        public async Task<ActionResult> CreateUser(User user)
         {
-            _context.Articles.Add(article);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return Json(new { message = "Article créé avec succes" });
+            return Json(new { message = "Utilisateur créé avec succès" });
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateArticle(int id, Article article)
+        public async Task<ActionResult> UpdateUser(int id, User user)
         {
-            if (id != article.Id)
+            if (id != user.Id)
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
 
-            _context.Entry(article).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return new HttpStatusCodeResult(System.Net.HttpStatusCode.NoContent);
         }
 
         [HttpDelete]
-        public async Task<ActionResult> DeleteArticle(int id)
+        public async Task<ActionResult> DeleteUser(int id)
         {
-            var article = await _context.Articles.FindAsync(id);
-            if (article == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return HttpNotFound();
             }
 
-            _context.Articles.Remove(article);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return new HttpStatusCodeResult(System.Net.HttpStatusCode.NoContent);
         }
