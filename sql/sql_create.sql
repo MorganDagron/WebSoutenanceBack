@@ -61,3 +61,14 @@ CREATE TABLE BlogArticle (
   creationDate DATETIME,
   categorie VARCHAR(255)
 );
+
+CREATE TABLE Comments (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  titre VARCHAR(255),
+  contenu TEXT,
+  creationDate DATETIME,
+  idUser INT,
+  IdArticle INT,
+  FOREIGN KEY (article_id) REFERENCES Article(id),
+  FOREIGN KEY (users_id) REFERENCES Users(id)
+);
