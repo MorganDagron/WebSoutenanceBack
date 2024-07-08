@@ -507,10 +507,16 @@
     <Compile Include="DAL\Authentification.cs">
       <DependentUpon>soutenanceAJCModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\BlogArticle.cs">
+      <DependentUpon>soutenanceAJCModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Commande.cs">
       <DependentUpon>soutenanceAJCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\CommandeArticle.cs">
+      <DependentUpon>soutenanceAJCModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Comments.cs">
       <DependentUpon>soutenanceAJCModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DaoArticle.cs" />

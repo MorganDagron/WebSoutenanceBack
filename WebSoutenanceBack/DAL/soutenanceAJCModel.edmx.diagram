@@ -17,6 +17,10 @@
         <AssociationConnector Association="soutenanceAJCModel.FK__CommandeA__artic__1ED998B2" ManuallyRouted="false" />
         <AssociationConnector Association="soutenanceAJCModel.FK__Commande__users___1B0907CE" ManuallyRouted="false" />
         <AssociationConnector Association="soutenanceAJCModel.FK__CommandeA__comma__1DE57479" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="soutenanceAJCModel.BlogArticle" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="soutenanceAJCModel.Comments" Width="1.5" PointX="5.25" PointY="4.625" />
+        <AssociationConnector Association="soutenanceAJCModel.FK__Comments__articl__38996AB5" />
+        <AssociationConnector Association="soutenanceAJCModel.FK__Comments__users___398D8EEE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

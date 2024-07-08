@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="soutenanceAJCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="soutenanceAJCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="id" />
@@ -22,6 +22,17 @@
           <Property Name="login" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="mot_de_passe" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="BlogArticle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imageUrl" Type="varchar" MaxLength="255" />
+          <Property Name="titre" Type="varchar" MaxLength="255" />
+          <Property Name="contenu" Type="text" />
+          <Property Name="creationDate" Type="datetime" />
+          <Property Name="categorie" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Commande">
           <Key>
             <PropertyRef Name="id" />
@@ -37,6 +48,17 @@
           <Property Name="commande_id" Type="int" Nullable="false" />
           <Property Name="article_id" Type="int" Nullable="false" />
           <Property Name="quantite" Type="int" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titre" Type="varchar" MaxLength="255" />
+          <Property Name="contenu" Type="text" />
+          <Property Name="creationDate" Type="datetime" />
+          <Property Name="users_id" Type="int" />
+          <Property Name="article_id" Type="int" />
         </EntityType>
         <EntityType Name="Matiere">
           <Key>
@@ -62,6 +84,7 @@
           <Property Name="mail" Type="varchar" MaxLength="255" />
           <Property Name="adresse_postale" Type="varchar" MaxLength="255" />
           <Property Name="telephone" Type="varchar" MaxLength="255" />
+          <Property Name="isAdmin" Type="bit" />
         </EntityType>
         <Association Name="FK__Article__matiere__15502E78">
           <End Role="Matiere" Type="Self.Matiere" Multiplicity="0..1" />
@@ -126,11 +149,37 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Comments__articl__38996AB5">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__users___398D8EEE">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="soutenanceAJCModelStoreContainer">
           <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Authentification" EntityType="Self.Authentification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogArticle" EntityType="Self.BlogArticle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CommandeArticle" EntityType="Self.CommandeArticle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Matiere" EntityType="Self.Matiere" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Taille" EntityType="Self.Taille" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -154,9 +203,16 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
             <End Role="Commande" EntitySet="Commande" />
             <End Role="CommandeArticle" EntitySet="CommandeArticle" />
           </AssociationSet>
+          <AssociationSet Name="FK__Comments__articl__38996AB5" Association="Self.FK__Comments__articl__38996AB5">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__users___398D8EEE" Association="Self.FK__Comments__users___398D8EEE">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="soutenanceAJCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -172,6 +228,7 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
           <NavigationProperty Name="Matiere" Relationship="Self.FK__Article__matiere__15502E78" FromRole="Article" ToRole="Matiere" />
           <NavigationProperty Name="Taille" Relationship="Self.FK__Article__taille___145C0A3F" FromRole="Article" ToRole="Taille" />
           <NavigationProperty Name="CommandeArticle" Relationship="Self.FK__CommandeA__artic__1ED998B2" FromRole="Article" ToRole="CommandeArticle" />
+          <NavigationProperty Name="Comments" Relationship="soutenanceAJCModel.FK__Comments__articl__38996AB5" FromRole="Article" ToRole="Comments" />
         </EntityType>
         <EntityType Name="Authentification">
           <Key>
@@ -227,6 +284,8 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
           <Property Name="adresse_postale" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="telephone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Commande" Relationship="Self.FK__Commande__users___1B0907CE" FromRole="Users" ToRole="Commande" />
+          <Property Name="isAdmin" Type="Boolean" />
+          <NavigationProperty Name="Comments" Relationship="soutenanceAJCModel.FK__Comments__users___398D8EEE" FromRole="Users" ToRole="Comments" />
         </EntityType>
         <Association Name="FK__Article__matiere__15502E78">
           <End Role="Matiere" Type="Self.Matiere" Multiplicity="0..1" />
@@ -316,7 +375,65 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
             <End Role="Commande" EntitySet="Commande" />
             <End Role="CommandeArticle" EntitySet="CommandeArticle" />
           </AssociationSet>
+          <EntitySet Name="BlogArticle" EntityType="soutenanceAJCModel.BlogArticle" />
+          <EntitySet Name="Comments" EntityType="soutenanceAJCModel.Comments" />
+          <AssociationSet Name="FK__Comments__articl__38996AB5" Association="soutenanceAJCModel.FK__Comments__articl__38996AB5">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comments__users___398D8EEE" Association="soutenanceAJCModel.FK__Comments__users___398D8EEE">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="BlogArticle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="titre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="contenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="creationDate" Type="DateTime" Precision="3" />
+          <Property Name="categorie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="contenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="creationDate" Type="DateTime" Precision="3" />
+          <Property Name="users_id" Type="Int32" />
+          <Property Name="article_id" Type="Int32" />
+          <NavigationProperty Name="Article" Relationship="soutenanceAJCModel.FK__Comments__articl__38996AB5" FromRole="Comments" ToRole="Article" />
+          <NavigationProperty Name="Users" Relationship="soutenanceAJCModel.FK__Comments__users___398D8EEE" FromRole="Comments" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK__Comments__articl__38996AB5">
+          <End Type="soutenanceAJCModel.Article" Role="Article" Multiplicity="0..1" />
+          <End Type="soutenanceAJCModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="article_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comments__users___398D8EEE">
+          <End Type="soutenanceAJCModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="soutenanceAJCModel.Comments" Role="Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -378,12 +495,37 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="soutenanceAJCModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nom" ColumnName="nom" />
                 <ScalarProperty Name="prenom" ColumnName="prenom" />
                 <ScalarProperty Name="mail" ColumnName="mail" />
                 <ScalarProperty Name="adresse_postale" ColumnName="adresse_postale" />
                 <ScalarProperty Name="telephone" ColumnName="telephone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogArticle">
+            <EntityTypeMapping TypeName="soutenanceAJCModel.BlogArticle">
+              <MappingFragment StoreEntitySet="BlogArticle">
+                <ScalarProperty Name="categorie" ColumnName="categorie" />
+                <ScalarProperty Name="creationDate" ColumnName="creationDate" />
+                <ScalarProperty Name="contenu" ColumnName="contenu" />
+                <ScalarProperty Name="titre" ColumnName="titre" />
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="soutenanceAJCModel.Comments">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="article_id" ColumnName="article_id" />
+                <ScalarProperty Name="users_id" ColumnName="users_id" />
+                <ScalarProperty Name="creationDate" ColumnName="creationDate" />
+                <ScalarProperty Name="contenu" ColumnName="contenu" />
+                <ScalarProperty Name="titre" ColumnName="titre" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
