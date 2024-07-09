@@ -15,15 +15,15 @@ INSERT INTO Taille (diametre) VALUES
 ('Extra Large');
 
 -- Inserting data into Article table
-INSERT INTO Article (nom, categorie, taille_id, matiere_id) VALUES
-('Boucle doreille', 'Bijoux', 1, 1),
-('Bracelet', 'Bijoux', 2, 2),
-('Collier', 'Bijoux', 3, 3),
-('Pendentif', 'Bijoux', 1, 4),
-('Montre', 'Montres', 2, 5),
-('Ceinture', 'Accessoires', 3, 1),
-('Porte-feuille', 'Accessoires', 2, 2),
-('Sac à main', 'Accessoires', 3, 3);
+INSERT INTO Article (nom, categorie, taille_id, matiere_id, prix) VALUES
+('Boucle doreille', 'Bijoux', 1, 1, 50.00),
+('Bracelet', 'Bijoux', 2, 2, 75.00),
+('Collier', 'Bijoux', 3, 3, 100.00),
+('Pendentif', 'Bijoux', 1, 4, 30.00),
+('Montre', 'Montres', 2, 5, 200.00),
+('Ceinture', 'Accessoires', 3, 1, 40.00),
+('Porte-feuille', 'Accessoires', 2, 2, 60.00),
+('Sac à main', 'Accessoires', 3, 3, 80.00);
 
 -- Inserting data into Users table
 INSERT INTO Users (nom, prenom, mail, adresse_postale, telephone, isAdmin) VALUES
