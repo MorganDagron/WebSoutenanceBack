@@ -35,12 +35,12 @@ INSERT INTO Users (nom, prenom, mail, adresse_postale, telephone, isAdmin) VALUE
 ('admin', 'admin', 'admin@example.com', '', '', 1);
 
 -- Inserting data into Commande table
-INSERT INTO Commande (users_id) VALUES
-(1),
-(2),
-(3),
-(4),
-(5);
+INSERT INTO Commande (mail) VALUES
+('john.doe@example.com'),
+('jane.doe@example.com'),
+('bob.smith@example.com'),
+('alice.johnson@example.com'),
+('mike.williams@example.com');
 
 -- Inserting data into CommandeArticle table
 INSERT INTO CommandeArticle (commande_id, article_id, quantite) VALUES

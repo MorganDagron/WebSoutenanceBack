@@ -34,8 +34,8 @@ CREATE TABLE Users (
 
 CREATE TABLE Commande (
   id INT IDENTITY(1,1) PRIMARY KEY,
-  users_id INT,
-  FOREIGN KEY (users_id) REFERENCES Users(id)
+  mail VARCHAR(255),
+  FOREIGN KEY (mail) REFERENCES Users(mail)
 );
 
 CREATE TABLE CommandeArticle (
