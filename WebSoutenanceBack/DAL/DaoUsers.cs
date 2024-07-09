@@ -79,11 +79,28 @@ namespace WebSoutenanceBack.DAL
             }
         }
 
-        public void Update(Users u)
+        /*public void Update(UserDto u)
         {
             soutenanceAJCEntities context = new soutenanceAJCEntities();
             context.Entry(u).State = EntityState.Modified;
             context.SaveChanges();
+        }*/
+        public bool Update(UserDto updatedUser)
+        {
+            using (soutenanceAJCEntities context = new soutenanceAJCEntities())
+            {
+                Users user = context.Users.FirstOrDefault(u => u.mail == updatedUser.Mail);
+                if (user == null) return false;
+
+                user.nom = updatedUser.Nom;
+                user.prenom = updatedUser.Prenom;
+                user.adresse_postale = updatedUser.AdressePostale;
+                user.telephone = updatedUser.Telephone;
+                user.isAdmin = updatedUser.IsAdmin;
+
+                context.SaveChanges();
+                return true;
+            }
         }
     }
 }

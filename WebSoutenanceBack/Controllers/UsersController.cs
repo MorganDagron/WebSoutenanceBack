@@ -47,7 +47,7 @@ namespace WebSoutenanceBack.Controllers
         }
 
         // PUT api/<controller>/5
-        public void Put([FromBody] Users u)
+        public void Put([FromBody] UserDto u)
         {
             new DaoUsers().Update(u);
         }
