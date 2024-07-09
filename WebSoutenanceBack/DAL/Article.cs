@@ -23,6 +23,7 @@ namespace WebSoutenanceBack.DAL
         public int id { get; set; }
         public string nom { get; set; }
         public string categorie { get; set; }
+        public Nullable<decimal> prix { get; set; }
     
         public virtual Matiere Matiere { get; set; }
         public virtual Taille Taille { get; set; }
