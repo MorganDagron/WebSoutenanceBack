@@ -14,8 +14,6 @@ namespace WebSoutenanceBack.DAL
     
     public partial class Commande
     {
-        internal int users_id;
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Commande()
         {
@@ -23,8 +21,8 @@ namespace WebSoutenanceBack.DAL
         }
     
         public int id { get; set; }
+        public string mail { get; set; }
     
-        public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommandeArticle> CommandeArticle { get; set; }
     }

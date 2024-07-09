@@ -39,5 +39,10 @@ namespace WebSoutenanceBack.Controllers
         {
             new DaoCommande().Delete(id);
         }
+
+        public List<Commande> Get(string mail)
+        {
+            return new DaoCommande().FindByUser(mail);
+        }
     }
 }

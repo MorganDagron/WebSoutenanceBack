@@ -14,12 +14,6 @@ namespace WebSoutenanceBack.DAL
     
     public partial class Users
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Users()
-        {
-            this.Commande = new HashSet<Commande>();
-        }
-    
         public int id { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
@@ -27,8 +21,5 @@ namespace WebSoutenanceBack.DAL
         public string adresse_postale { get; set; }
         public string telephone { get; set; }
         public Nullable<bool> isAdmin { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Commande> Commande { get; set; }
     }
 }

@@ -27,7 +27,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="users_id" Type="int" />
+          <Property Name="mail" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="CommandeArticle">
           <Key>
@@ -91,18 +91,9 @@
         <!--Errors Found During Generation:
 warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK__Authentif__login__21B6055D" />-->
-        <Association Name="FK__Commande__users___1B0907CE">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Commande">
-              <PropertyRef Name="users_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Commande__mail__1B0907CE' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Commande__mail__1B0907CE" />-->
         <Association Name="FK__CommandeA__artic__1ED998B2">
           <End Role="Article" Type="Self.Article" Multiplicity="1" />
           <End Role="CommandeArticle" Type="Self.CommandeArticle" Multiplicity="*" />
@@ -143,10 +134,6 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
             <End Role="Taille" EntitySet="Taille" />
             <End Role="Article" EntitySet="Article" />
           </AssociationSet>
-          <AssociationSet Name="FK__Commande__users___1B0907CE" Association="Self.FK__Commande__users___1B0907CE">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Commande" EntitySet="Commande" />
-          </AssociationSet>
           <AssociationSet Name="FK__CommandeA__artic__1ED998B2" Association="Self.FK__CommandeA__artic__1ED998B2">
             <End Role="Article" EntitySet="Article" />
             <End Role="CommandeArticle" EntitySet="CommandeArticle" />
@@ -184,7 +171,7 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__Commande__users___1B0907CE" FromRole="Commande" ToRole="Users" />
+          <Property Name="mail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CommandeArticle" Relationship="Self.FK__CommandeA__comma__1DE57479" FromRole="Commande" ToRole="CommandeArticle" />
         </EntityType>
         <EntityType Name="CommandeArticle">
@@ -225,7 +212,6 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
           <Property Name="adresse_postale" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="telephone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="isAdmin" Type="Boolean" />
-          <NavigationProperty Name="Commande" Relationship="Self.FK__Commande__users___1B0907CE" FromRole="Users" ToRole="Commande" />
         </EntityType>
         <Association Name="FK__Article__matiere__15502E78">
           <End Role="Matiere" Type="Self.Matiere" Multiplicity="0..1" />
@@ -246,10 +232,6 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
               <PropertyRef Name="article_id" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Commande__users___1B0907CE">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
         </Association>
         <Association Name="FK__CommandeA__comma__1DE57479">
           <End Role="Commande" Type="Self.Commande" Multiplicity="1" />
@@ -283,10 +265,6 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
             <End Role="Article" EntitySet="Article" />
             <End Role="CommandeArticle" EntitySet="CommandeArticle" />
           </AssociationSet>
-          <AssociationSet Name="FK__Commande__users___1B0907CE" Association="Self.FK__Commande__users___1B0907CE">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Commande" EntitySet="Commande" />
-          </AssociationSet>
           <AssociationSet Name="FK__CommandeA__comma__1DE57479" Association="Self.FK__CommandeA__comma__1DE57479">
             <End Role="Commande" EntitySet="Commande" />
             <End Role="CommandeArticle" EntitySet="CommandeArticle" />
@@ -319,6 +297,7 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
             <EntityTypeMapping TypeName="soutenanceAJCModel.Commande">
               <MappingFragment StoreEntitySet="Commande">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -377,15 +356,6 @@ warning 6035: The relationship 'FK__Authentif__login__21B6055D' has columns that
               <ScalarProperty Name="id" ColumnName="id" />
             </EndProperty>
             <Condition IsNull="false" ColumnName="taille_id" />
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="FK__Commande__users___1B0907CE" TypeName="soutenanceAJCModel.FK__Commande__users___1B0907CE" StoreEntitySet="Commande">
-            <EndProperty Name="Users">
-              <ScalarProperty Name="id" ColumnName="users_id" />
-            </EndProperty>
-            <EndProperty Name="Commande">
-              <ScalarProperty Name="id" ColumnName="id" />
-            </EndProperty>
-            <Condition IsNull="false" ColumnName="users_id" />
           </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>

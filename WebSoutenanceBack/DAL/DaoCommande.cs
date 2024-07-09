@@ -42,10 +42,10 @@ namespace WebSoutenanceBack.DAL
             context.SaveChanges();
         }
 
-        public List<Commande> FindByUser(int userId)
+        public List<Commande> FindByUser(string mail)
         {
             soutenanceAJCEntities context = new soutenanceAJCEntities();
-            return context.Commande.Where(c => c.users_id == userId).ToList<Commande>();
+            return context.Commande.Where(c => c.mail == mail).ToList<Commande>();
         }
 
         public List<Article> FindArticlesByCommande(int commandeId)
