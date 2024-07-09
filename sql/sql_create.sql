@@ -18,6 +18,7 @@ CREATE TABLE Article (
   categorie VARCHAR(255),
   taille_id INT,
   matiere_id INT,
+  prix DECIMAL(10, 2),
   FOREIGN KEY (taille_id) REFERENCES Taille(id),
   FOREIGN KEY (matiere_id) REFERENCES Matiere(id)
 );
